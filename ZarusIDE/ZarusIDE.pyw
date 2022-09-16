@@ -47,4 +47,10 @@ while True:
     if event == sg.WINDOW_CLOSED:
         break
     elif event=="ccs":
-        
+        ran=str(random.randint(0,1000))
+        out="scripts\\scriptfolder-"+ran+"\\"
+        os.mkdir(out)
+        temp3=values["ccs"]
+        print(temp3)
+        os.system(f"ZarusMain.py pyexe {temp3} {out}")
+        sg.Popup("Finished",f"Compiled to folder {ran}")
