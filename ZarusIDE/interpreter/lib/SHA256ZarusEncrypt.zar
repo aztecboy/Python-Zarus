@@ -1,0 +1,14 @@
+#lib Beta 0.0.1
+#@.net Sha256Encrypt.dll
+
+#@@
+#Type ZarusLibrary;
+#lib name is SHA256ZarusEncrypt;
+#Include .net Sha256Encrypt.dll;
+from Sha256Encrypt import Encrypt;
+class SHA256ZarusEncrypt:
+#;
+    encrypt=Encrypt();
+    def Hash(a1):
+        return SHA256ZarusEncrypt.encrypt.ComputeStringToHash(a1);
+#;

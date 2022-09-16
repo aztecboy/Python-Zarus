@@ -1,0 +1,18 @@
+from Zarus import SystemX,Zarus
+import clr,os,time
+Zarus.Terminal.UpdateWindow("ZarusScript")
+print("Importing dll files...")
+
+def Delay(a1):
+        time.sleep(a1)
+#$
+print("Importing finished")
+os.system("cls")
+Zarus.Terminal.Close()
+class Const:
+        Map={}
+class Misc:
+        Errors=[]
+        Runtime=0
+class Main:
+  #############
