@@ -7,7 +7,7 @@ def run():
 
 threading.Thread(target=run).start()
 while True:
-    time.sleep(0.01)
-    Misc.Runtime+=0.01
+    time.sleep(0.0001)
+    Misc.Runtime+=0.0001
     if Vars.Closed:
         quit()

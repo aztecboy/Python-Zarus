@@ -1,4 +1,4 @@
-import sys,clr,os,ctypes,threading,keyboard,time,pyfiglet,pip
+import sys,clr,os,ctypes,threading,keyboard,time,pyfiglet,pip,base64
 from colorama import init,Fore,Back,Style
 init(convert=True)
 clr.AddReference("lib/ZarusBase")
@@ -12,7 +12,7 @@ class Vars:
     Closed=False
     class TerminalVars:
         Contained=""
-class SystemX:
+class System:
     class SocketConnections:
         def BindRoute(a1,a2):
             Socket.BindAddressAndPort(a1,a2)
@@ -48,13 +48,63 @@ class SystemX:
         def InfoMessage(a1,a2):
             return Notif.Show(a1,a2)
 class Zarus:
+
     def EndOfScript():
         Vars.Closed=True
+
+    class Drakk:
+        def CreateFile(a1):
+            with open(a1+".drakk","w") as f:
+                f.write("Drakk Version: Beta 0.0.1\nEncoding: None\n")
+        def FindEncoding(a1):
+            with open(a1+".drakk","r") as f:
+                return f.read().split("\n")[1].replace("Encoding: ","")
+        def CreateFileWithEncoding(a1,a2):
+            with open(a1+".drakk","w") as f:
+                f.write(f"Drakk Version: Beta 0.0.1\nEncoding: {a2}\n")
+        def AddString(a1,a2,a3):
+            with open(a3+".drakk","a") as f:
+                f.write(f"\n---\nContent Type: String\nClass: {a1}\n{a2}")
+        def AddImage(a1,a2,a3):
+            with open(a3+".drakk","a") as f:
+                f.write(f"\n---\nContent Type: Image\nClass: {a1}\n{a2}")
+        def AddDictionary(a1,a2,a3):
+            with open(a3+".drakk","a") as f:
+                temp=list(str(a2))
+                temp.pop(len(temp)-1)
+                temp.pop(0)
+                temp2=""
+                for i in range(0,len(temp)):
+                    temp2+=temp[i]
+                f.write(f"\n---\nContent Type: Dictionary\nClass: {a1}\n{temp2}")
+        def GetClass(a1,a2):
+            with open(a2+".drakk","r") as f:
+                temp1=f.read().split("---")
+                for i in range(0,len(temp1)):
+                    temp2=temp1[i].split("\n")
+                    if a1 in temp2[2]:
+                        if "String" in temp2[1]:
+                            return temp2[3]
+                        if "Image" in temp2[1]:
+                            return temp2[3]
+                        if "Dictionary" in temp2[1]:
+                            temp3={}
+                            temp4=temp2[3].split(":")
+                            for i in range(0,len(temp4)):
+                                try:
+                                    temp3.update({temp4[i]:temp4[i+1]})
+                                except:
+                                    break
+                                i+=1
+                            return temp3
+                        else:
+                            return Zarus.ErrorCodes.DoesNotExist,Zarus.ErrorCodes.DoesNotExist
+
     class PythonModuleManipulater:
         def Install(a1):
             pip.main(["install",a1])
     class ErrorCodes:
-        DoesNotExist="$$556633944110102"
+        DoesNotExist="$$DNE"
     class Shell:
         def ToShell(a1):
             os.system(a1)
@@ -92,6 +142,13 @@ class Zarus:
 
     class Terminal:
         Font=""
+        class StringTypes:
+            class Ensured:
+                def Ensure(a1):
+                    a1=a1.replace("***","*").replace("**","")
+                    return f"E-0.0.1[{a1}]-***,*:**,None"
+                def EnsureWithoutMark(a1):
+                    return a1.replace("***","*").replace("**","")
         class ASCIIArt:
             def Banner3D(a1):
                 return pyfiglet.figlet_format(a1,"banner3-D")
@@ -125,6 +182,8 @@ class Zarus:
 
         def UpdateWindow(a1):
             os.system(f"title {a1}")
+        def Wipe():
+            Vars.TerminalVars.Contained=""
         def Open():
             ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 1 )
         def Close():

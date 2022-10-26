@@ -1,0 +1,13 @@
+#Zarus Thread Beta 0.1
+class {--}:
+    Map={}
+    class InThread:
+        def IfEnd():
+            if Main.{--}.Vars.End:
+                quit()
+    class Vars:
+        End=False
+    def Begin():
+        threading.Thread(target=Main.{..}ZT).start()
+    def Stop():
+        Main.{--}.Vars.End=True
